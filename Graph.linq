@@ -71,7 +71,7 @@ internal sealed class Graph : IEnumerable<Graph.Edge> {
         /// <summary>
         /// Compares this edge to an arbitrary object or boxed value-type
         /// instance (or null).
-        /// <summary>
+        /// </summary>
         /// <param name="obj">The thing to compare this to.</param>
         /// <returns>True off obj is an edge equal to this one.</returns>
         /// <remarks>Uses <see cref="operator=="/>.</remarks>
@@ -175,7 +175,7 @@ internal sealed class Graph : IEnumerable<Graph.Edge> {
 /// encapsulation unnecessarily.
 /// </remarks>
 internal static class GraphExtensions {
-    /// <summary>Find vertices reachable from a given start vertex.</summary>
+    /// <summary>Finds vertices reachable from a given start vertex.</summary>
     /// <param name="self">The graph to search in.</param>
     /// <param name="start">The vertex to search from.</param>
     /// <returns>The vertices reachable from start (including itself).</returns>

@@ -40,22 +40,22 @@ internal static class Program {
         return result;
     }
 
-    private static string ToCsv<T>(this IEnumerable<T> self)
+    private static string CommaJoin<T>(this IEnumerable<T> self)
         => string.Join(", ", self);
 
     private static void PrintRows(IList<int>[] adj)
     {
         for (var src = 0; src < adj.Length; ++src) {
-            var csv = adj[src].ToCsv();
-            Console.WriteLine($"Forward neighbors of {src}:  {csv}");
+            var result = adj[src].CommaJoin();
+            Console.WriteLine($"Forward neighbors of {src}:  {result}");
         }
     }
 
     private static void Test(IList<int>[] adj)
     {
         for (var start = 0; start < adj.Length; ++start) {
-            var csv = adj.VerticesReachableFrom(start).ToCsv();
-            Console.WriteLine($"Reachable from {start}:  {csv}");
+            var result = adj.VerticesReachableFrom(start).CommaJoin();
+            Console.WriteLine($"Reachable from {start}:  {result}");
         }
     }
 
