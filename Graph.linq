@@ -4,7 +4,16 @@
 
 /// <summary>Adjacency list representation of a fixed-order digraph.</summary>
 /// <remarks>
+/// <para>
 /// The graph never gains or loses vertices but can gain (but not lose) edges.
+/// </para>
+/// <para>
+/// Bad input should throw an exception, but the exception may not be very
+/// illuminating. If this is used as a library, error reporting should be
+/// improved, either by checking for errors explicitly or by catching
+/// exceptions and throwing clearer ones (perhaps with the caught exceptions
+/// wrapped as inner exceptions).
+/// </para>
 /// </remarks>
 internal sealed class Graph : IEnumerable<Graph.Edge> {
     /// <summary>An (unweighted) edge in a directed graph.</summary>
@@ -127,6 +136,12 @@ internal static class GraphExtensions {
 
 /// <summary>Tests some functionality in Graph and GraphExtensions.</summary>
 internal static class UnitTest {
+    private static void Test(Graph graph)
+    {
+        foreach (var start in Enumerable.Range(0, graph.Order))
+            graph.VerticesReachableFrom(start).Dump($"Reachable from {start}");
+    }
+
     private static void Main()
     {
         var graph = new Graph(10) {
@@ -147,7 +162,6 @@ internal static class UnitTest {
         
         graph.Dump(nameof(graph));
         
-        const int start = 2;
-        graph.VerticesReachableFrom(start).Dump($"reachable from {start}");
+        Test(graph);
     }
 }

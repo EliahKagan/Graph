@@ -37,26 +37,31 @@ internal static class Program {
         Dfs(start);
         return result;
     }
+    
+    private static void Test(IList<int>[] adj)
+    {
+        for (var start = 0; start < adj.Length; ++start)
+            adj.VerticesReachableFrom(start).Dump($"Reachable from {start}");
+    }
 
     private static void Main()
     {
-        var adj = MakeAdjacencyList(10, ( 0, 2 ),
-                                        ( 1, 3 ),
-                                        ( 2, 4 ),
-                                        ( 3, 7 ),
-                                        ( 5, 4 ),
-                                        ( 9, 8 ),
-                                        ( 4, 3 ),
-                                        ( 5, 9 ),
-                                        ( 8, 4 ),
-                                        ( 6, 8 ),
-                                        ( 0, 6 ),
-                                        ( 1, 0 ),
-                                        ( 8, 1 ));
+        var adj = MakeAdjacencyList(10, (0, 2),
+                                        (1, 3),
+                                        (2, 4),
+                                        (3, 7),
+                                        (5, 4),
+                                        (9, 8),
+                                        (4, 3),
+                                        (5, 9),
+                                        (8, 4),
+                                        (6, 8),
+                                        (0, 6),
+                                        (1, 0),
+                                        (8, 1));
         
         adj.Dump(nameof(adj));
         
-        const int start = 2;
-        adj.VerticesReachableFrom(start).Dump($"reachable from {start}");
+        Test(adj);
     }
 }
