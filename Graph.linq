@@ -23,7 +23,7 @@ internal sealed class Graph : IEnumerable<Graph.Edge> {
         public bool Equals(Edge rhs) => this == rhs;
         
         public override bool Equals(object? obj)
-            => obj is Edge rhs && Equals(rhs);
+            => obj is Edge rhs && this == rhs;
         
         public override int GetHashCode()
         {
@@ -106,7 +106,7 @@ internal static class GraphExtensions {
     /// <param name="self">The graph to search in.</param>
     /// <param name="start">The vertex to search from.</param>
     /// <returns>The vertices reachable from start (including itself).</returns>
-    internal static IList<int> ReachableFrom(this Graph self, int start)
+    internal static IList<int> VerticesReachableFrom(this Graph self, int start)
     {
         var visited = new BitArray(self.Order);
         var result = new List<int>();
@@ -148,6 +148,6 @@ internal static class UnitTest {
         graph.Dump(nameof(graph));
         
         const int start = 2;
-        graph.ReachableFrom(start).Dump($"reachable from {start}");
+        graph.VerticesReachableFrom(start).Dump($"reachable from {start}");
     }
 }
