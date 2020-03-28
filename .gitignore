@@ -1,0 +1,3 @@
+# Build files (in any subdirectory).
+bin/
+obj/
