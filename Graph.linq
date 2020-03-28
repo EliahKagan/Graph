@@ -19,21 +19,67 @@ internal sealed class Graph : IEnumerable<Graph.Edge> {
     /// <summary>An (unweighted) edge in a directed graph.</summary>
     /// <remarks>Can be an edge between separate vertices or a loop.</remarks>
     internal readonly struct Edge : IEquatable<Edge> {
+        /// <summary>Check if directed edges are equal.</summary>
+        /// <param name="lhs">The first edge to compare for equality.</param>
+        /// <param name="rhs">The second edge to compare for equality.</param>
+        /// <returns>
+        /// True if the source vertices are equal and the destination vertices
+        /// are equal. False otherwise.
+        /// </returns>
         public static bool operator==(Edge lhs, Edge rhs)
             => (lhs.Src, lhs.Dest) == (rhs.Src, rhs.Dest);
         
+        /// <summary>Check if directed edges are unequal.</summary>
+        /// <param name="lhs">The first edge to compare.</param>
+        /// <param name="rhs">The second edge to compare.</param>
+        /// <returns>False if <c>lhs == rhs</c>. True otherwise.</returns>
+        /// <remarks>Calls and negates <see cref="operator=="/>.</remarks>
         public static bool operator!=(Edge lhs, Edge rhs) => !(lhs == rhs);
     
+        /// <summary>
+        /// Constructs a directed edge from its incident vertices.
+        /// </summary>
+        /// <param name="src">
+        /// The source vertex, from which this is an out-edge.
+        /// </param>
+        /// <param name="dest">
+        /// The destination vertex, to which this is an in-edge.
+        /// </param>
+        /// <returns>The edge from <c>src</c> to <c>dest</c>.</returns>
         internal Edge(int src, int dest) => (Src, Dest) = (src, dest);
         
+        /// <summary>
+        /// Deconstructs a directed edge into its incident vertices.
+        /// </summary>
+        /// <param name="src">
+        /// Receives the source vertex, from which this is an out-edge.
+        /// </param>
+        /// <param name="dest">
+        /// Receives the destination vertex, to which this is an in-edge.
+        /// </param>
         internal void Deconstruct(out int src, out int dest)
             => (src, dest) = (Src, Dest);
         
+        /// <summary>Compares this edge to another, for equality.</summary>
+        /// <param name="rhs">The other vertex, to comapre this to.</param>
+        /// <returns>
+        /// True iff <c>this</c> and <c>other</c> are the same edge.
+        /// </returns>
+        /// <remarks>Calls <see cref="operator=="/>.</remarks>
         public bool Equals(Edge rhs) => this == rhs;
         
+        /// <summary>
+        /// Compares this edge to an arbitrary object or boxed value-type
+        /// instance (or null).
+        /// <summary>
+        /// <param name="obj">The thing to compare this to.</param>
+        /// <returns>True off obj is an edge equal to this one.</returns>
+        /// <remarks>Uses <see cref="operator=="/>.</remarks>
         public override bool Equals(object? obj)
             => obj is Edge rhs && this == rhs;
         
+        /// <summary>Computes a prehash used by hash-based containers.</summary>
+        /// <returns>The computed prehash ("hash code").</returns>
         public override int GetHashCode()
         {
             const int seed = 17;
@@ -47,10 +93,22 @@ internal sealed class Graph : IEnumerable<Graph.Edge> {
             }
         }
         
+        /// <summary>Gets this edge as human-readable text.</summary>
+        /// <returns>A text ordered-pair representation of this edge.</returns>
+        /// <remarks>
+        /// Uses <c>(</c> <c>)</c> (not <c>{</c> <c>}</c>) as the edge is
+        /// directed.
+        /// </remarks>
         public override string ToString() => $"({Src}, {Dest})";
     
+        /// <summary>
+        /// The source vertex, from which this is an out-edge.
+        /// </summary>
         internal int Src { get; }
         
+        /// <summary>
+        /// The destination vertex, to which this is an in-edge.
+        /// </summary>
         internal int Dest { get; }
     }
 
@@ -90,6 +148,12 @@ internal sealed class Graph : IEnumerable<Graph.Edge> {
     /// <returns>The destination vertices of <c>src</c>'s out-edges.</returns>
     internal ReadOnlyCollection<int> this[int src] => _adj[src].AsReadOnly();
     
+    /// <summary>Enumerates the edges in this graph.</summary>
+    /// <returns>An enumerator that yields each directed edge.</returns>
+    /// <remarks>
+    /// This graph uses an adjacency-list representation, but when enumerated
+    /// is treated as a collection of edges rather than a collection of rows.
+    /// </remarks>
     public IEnumerator<Edge> GetEnumerator()
     {
         foreach (var src in Enumerable.Range(0, Order)) {
@@ -136,12 +200,24 @@ internal static class GraphExtensions {
 
 /// <summary>Tests some functionality in Graph and GraphExtensions.</summary>
 internal static class UnitTest {
+    /// <summary>
+    /// Test <see cref="GraphExtensions.VerticesReachableFrom"/> from each
+    /// vertex in the graph.
+    /// </summary>
+    /// <remarks>
+    /// If the goal were to product all this information, rather than to test
+    /// that function, then this algorithm would be needlessly inefficient.
+    /// </remarks>
     private static void Test(Graph graph)
     {
         foreach (var start in Enumerable.Range(0, graph.Order))
             graph.VerticesReachableFrom(start).Dump($"Reachable from {start}");
     }
 
+    /// <summary>
+    /// Makes a small graph, shows its contents, and shows reachability from
+    /// each of its vertices.
+    /// </summary>
     private static void Main()
     {
         var graph = new Graph(10) {
