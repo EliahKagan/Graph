@@ -205,7 +205,7 @@ internal static class UnitTest {
     /// vertex in the graph.
     /// </summary>
     /// <remarks>
-    /// If the goal were to product all this information, rather than to test
+    /// If the goal were to produce all this information, rather than to test
     /// that function, then this algorithm would be needlessly inefficient.
     /// </remarks>
     private static void Test(Graph graph)
