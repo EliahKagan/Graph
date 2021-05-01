@@ -1,3 +1,6 @@
-# Build files (in any subdirectory).
+# Build files (in any subdirectory)
 bin/
 obj/
+
+# Visual Studio local files
+.vs/
