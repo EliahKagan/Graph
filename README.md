@@ -36,11 +36,11 @@ violated.)
 
 ## License
 
-The contents of this repository were written in 2020 by Eliah Kagan (with a
-minor documentation update in 2021). They are offered under
-[**0BSD**](https://spdx.org/licenses/0BSD.html), a [&ldquo;public-domain
+The contents of this repository were written in 2020 by Eliah Kagan (with minor
+updates in 2021 and 2023). They are offered under
+[0BSD](https://spdx.org/licenses/0BSD.html), a [&ldquo;public-domain
 equivalent&rdquo;](https://en.wikipedia.org/wiki/Public-domain-equivalent_license)
-license. See [`LICENSE`](LICENSE).
+license. See [**`LICENSE`**](LICENSE).
 
 ## See also
 
