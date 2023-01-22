@@ -1,6 +1,7 @@
-# Build files (in any subdirectory)
+# Build files
 bin/
 obj/
+/binaries-for-infer/
 
 # Visual Studio local files
 .vs/
