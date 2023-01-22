@@ -15,6 +15,8 @@
 // OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 // CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+#nullable enable
+
 /// <summary>Adjacency list representation of a fixed-order digraph.</summary>
 /// <remarks>
 /// <para>
